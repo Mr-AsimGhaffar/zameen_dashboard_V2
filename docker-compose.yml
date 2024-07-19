@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  frontend:
+    container_name: frontend_container
+    build:
+      context: ./
+      dockerfile: DockerFile
+    ports:
+      - "4000:5000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    restart: "unless-stopped"
+    networks:
+      - backend
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  backend:
+    external: true
+    name: scrapper_zameen_backend_backend
